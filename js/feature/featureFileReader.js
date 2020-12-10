@@ -31,6 +31,7 @@ import {bgzBlockSize, unbgzf} from '../bam/bgzf.js';
 import {buildOptions} from "../util/igvUtils.js";
 import GWASParser from "../gwas/gwasParser.js";
 import AEDParser from "../aed/AEDParser.js";
+import IRFinderParser from "../irfinder/irfinderParser.js"; 
 import {FileUtils, StringUtils, URIUtils} from "../../node_modules/igv-utils/src/index.js";
 import {loadIndex} from "../bam/indexFactory.js";
 
@@ -149,6 +150,8 @@ class FeatureFileReader {
                 return new GWASParser(config);
             case "aed" :
                 return new AEDParser(config);
+			case "irfinder":
+				return new IRFinderParser(config);
             default:
                 return new FeatureParser(config);
         }

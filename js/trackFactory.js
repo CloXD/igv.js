@@ -11,6 +11,8 @@ import GWASTrack from "./gwas/gwasTrack.js";
 import GCNVTrack from "./gcnv/gcnvTrack.js";
 import RnaStructTrack from "./rna/rnaStruct.js";
 import IdeogramTrack from "./ideogramTrack.js";
+import IRFinderTrack from "./irfinder/irfinderTrack.js";
+import IRratioTrack from "./irfinder/irratioTrack.js";
 
 const tracks = {
     'ideogram': (config, browser) => {
@@ -34,6 +36,12 @@ const tracks = {
     'alignment': (config, browser) => {
         return new BAMTrack(config, browser);
     },
+	'irfinder' : ( config, browser) =>{
+		return new IRFinderTrack(config, browser);
+	},
+	'irratio' : ( config, browser )=>{
+			return new IRratioTrack(config, browser);
+	},
     'interaction': (config, browser) => {
         return new InteractionTrack(config, browser);
     },

@@ -982,7 +982,11 @@ class Browser {
                 for (let features of featureArray) {
                     allFeatures = allFeatures.concat(features);
                 }
-                dataRange = doAutoscale(allFeatures);
+				if (typeof groupTrackViews[0].track.doAutoscale  === 'function') {
+					dataRange = groupTrackViews[0].track.doAutoscale(allFeatures);
+				}  else {
+					dataRange = doAutoscale(allFeatures);	
+				}
 
                 for (let trackView of groupTrackViews) {
                     trackView.track.dataRange = dataRange;

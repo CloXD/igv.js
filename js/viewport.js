@@ -508,7 +508,6 @@ class ViewPort extends ViewportBase {
     }
 
     async getFeatures(track, chr, start, end, bpPerPixel) {
-
         if (this.tile && this.tile.containsRange(chr, start, end, bpPerPixel)) {
             return this.tile.features;
         } else if (typeof track.getFeatures === "function") {
