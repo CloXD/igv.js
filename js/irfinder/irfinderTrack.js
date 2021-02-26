@@ -37,6 +37,12 @@ class IRFinderTrack extends TrackBase {
 
 	constructor(config, browser) {
 		super(config, browser);
+		this.featureSource = FeatureSource(config, browser.genome);
+		this.init(config)
+		this.prev_request=""
+	}
+	
+	init(config){
 		this.height = config.height || 100;   // The preferred height
 		this.margin = config.margin === undefined ? this.height < 100 ?  Math.round(this.height / 5) : 20 : config.margin;
 		this.autoscale = config.autoscale || config.max === undefined;
@@ -53,11 +59,9 @@ class IRFinderTrack extends TrackBase {
 		}
 		this.popoverWindow = (config.popoverWindow === undefined ? DEFAULT_POPOVER_WINDOW : config.popoverWindow);
 		this.description = config.description;  // might be null
-
 		this.color = config.color === undefined ? "#80D6F8" : config.color;
 		this.warningColors = config.warningColors === undefined ? ["#f71735", "#feb95f", "#b49a67", "#182825", "#80D6F8"] : config.warningColors;
 		this.warnings = ["LowCover", "LowSplicing", "MinorIsoform", "NonUniformIntronCover", "-"]
-		this.featureSource = FeatureSource(config, browser.genome);
 		this.render=this.drawIntronDepth;
 	}
 
@@ -70,7 +74,12 @@ class IRFinderTrack extends TrackBase {
 
 
 	async getFeatures(chr, start, end) {
-		this.features = await this.featureSource.getFeatures({ chr, start, end });
+		let request=""+chr+"-"+start+":"+end;
+		if (  request != this.prev_request  ){
+			this.features = await this.featureSource.getFeatures({ chr, start, end });
+			this.prev_request = request	
+		}
+		
 		return this.filter(this.features);
 	}
 

@@ -13,6 +13,7 @@ import RnaStructTrack from "./rna/rnaStruct.js";
 import IdeogramTrack from "./ideogramTrack.js";
 import IRFinderTrack from "./irfinder/irfinderTrack.js";
 import IRratioTrack from "./irfinder/irratioTrack.js";
+import iMOKATrack from "./imoka/imokaTrack.js";
 
 const tracks = {
     'ideogram': (config, browser) => {
@@ -41,6 +42,9 @@ const tracks = {
 	},
 	'irratio' : ( config, browser )=>{
 			return new IRratioTrack(config, browser);
+	},
+	'imoka' : (config, browser)=>{
+		return new iMOKATrack(config, browser);
 	},
     'interaction': (config, browser) => {
         return new InteractionTrack(config, browser);
