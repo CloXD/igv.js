@@ -19,6 +19,7 @@ const TRIBBLE_MAGIC = 1480870228;   //  byte[]{'T', 'I', 'D', 'X'};
  *
  */
 async function loadIndex(indexURL, config, genome) {
+
     let arrayBuffer = await igvxhr.loadArrayBuffer(indexURL, buildOptions(config));
     let dv = new DataView(arrayBuffer);
 
